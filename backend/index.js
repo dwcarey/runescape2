@@ -1,9 +1,16 @@
 const express = require('express');
 const cors = require('cors');
+const fetch = require('node-fetch');
+const path = require('path');
 
 const app = express();
-app.use(cors());
-const port = 3001;
+
+// Use CORS middleware
+app.use(cors({
+    origin: 'https://backend-9p7kzehf6-daniel-careys-projects.vercel.app' // Replace with your frontend URL if deployed
+}));
+
+const port = process.env.PORT || 3001;
 
 app.get('/', (req, res) => {
     res.send({
@@ -38,6 +45,13 @@ function parseHighScores(data) {
     }).filter(score => score.rank !== undefined && score.rank !== "-1").slice(0, 30); // Filter out invalid scores and limit to 30
     return highScores;
 }
+
+// Serve static files from the React frontend app
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

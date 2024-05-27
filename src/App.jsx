@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 
-const queryURL = "http://localhost:3001/highscores?player=";
+const queryURL = "https://backend-9p7kzehf6-daniel-careys-projects.vercel.app/highscores?player=";
 
 function App() {
     const [message, setMessage] = useState('');
@@ -16,9 +16,10 @@ function App() {
     ];
 
     useEffect(() => {
-        fetch('http://localhost:3001')
+        fetch('https://backend-9p7kzehf6-daniel-careys-projects.vercel.app/')
             .then(res => res.json())
-            .then(data => setMessage(data.message));
+            .then(data => setMessage(data.message))
+            .catch(err => console.error('Error:', err));
     }, []);
 
     const handleInputChange = (e) => {
@@ -30,7 +31,7 @@ function App() {
         fetch(`${queryURL}${playerName}`)
             .then(res => res.json())
             .then(data => setHighScores(data))
-            .catch(err => console.error(err));
+            .catch(err => console.error('Error:', err));
     };
 
     return (
