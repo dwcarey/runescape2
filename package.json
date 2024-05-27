@@ -13,8 +13,11 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@wise-old-man/utils": "^3.3.2",
+    "process": "^0.11.10",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "util": "^0.12.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
